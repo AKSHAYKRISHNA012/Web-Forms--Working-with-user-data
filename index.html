@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Web Forms Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .required {
+            color: red;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        input:valid {
+            border-color: #4CAF50;
+        }
+
+        input:invalid:not(:focus):not(:placeholder-shown) {
+            border-color: #f44336;
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .radio-item, .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .radio-item input, .checkbox-item input {
+            width: auto;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .btn-secondary {
+            background-color: #666;
+        }
+
+        .btn-secondary:hover {
+            background-color: #555;
+        }
+
+        .error-message {
+            color: #f44336;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Basic Contact Form</h1>
+        
+        <div class="success-message" id="successMessage">
+            Form submitted successfully!
+        </div>
+
+        <form id="contactForm">
+            <!-- Text Inputs -->
+            <div class="form-group">
+                <label for="firstName">First Name <span class="required">*</span></label>
+                <input type="text" id="firstName" name="firstName" required placeholder="Enter your first name">
+                <div class="error-message">First name is required</div>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name <span class="required">*</span></label>
+                <input type="text" id="lastName" name="lastName" required placeholder="Enter your last name">
+                <div class="error-message">Last name is required</div>
+            </div>
+
+            <!-- Email Input -->
+            <div class="form-group">
+                <label for="email">Email Address <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required placeholder="example@email.com">
+                <div class="error-message">Please enter a valid email address</div>
+            </div>
+
+            <!-- Phone Input -->
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890">
+            </div>
+
+            <!-- Date Input -->
+            <div class="form-group">
+                <label for="birthdate">Date of Birth</label>
+                <input type="date" id="birthdate" name="birthdate">
+            </div>
+
+            <!-- Number Input -->
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" min="1" max="120" placeholder="Enter your age">
+            </div>
+
+            <!-- Select Dropdown -->
+            <div class="form-group">
+                <label for="country">Country</label>
+                <select id="country" name="country">
+                    <option value="">Select your country</option>
+                    <option value="us">United States</option>
+                    <option value="ca">Canada</option>
+                    <option value="uk">United Kingdom</option>
+                    <option value="au">Australia</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <!-- Radio Buttons -->
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="male" name="gender" value="male">
+                        <label for="male">Male</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female">Female</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="other" name="gender" value="other">
+                        <label for="other">Other</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Checkboxes -->
+            <div class="form-group">
+                <label>Interests (Select all that apply)</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="tech" name="interests" value="technology">
+                        <label for="tech">Technology</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sports" name="interests" value="sports">
+                        <label for="sports">Sports</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="music" name="interests" value="music">
+                        <label for="music">Music</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="travel" name="interests" value="travel">
+                        <label for="travel">Travel</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Range Input -->
+            <div class="form-group">
+                <label for="experience">Years of Experience: <span id="experienceValue">5</span></label>
+                <input type="range" id="experience" name="experience" min="0" max="20" value="5">
+            </div>
+
+            <!-- Color Input -->
+            <div class="form-group">
+                <label for="favoriteColor">Favorite Color</label>
+                <input type="color" id="favoriteColor" name="favoriteColor" value="#4CAF50">
+            </div>
+
+            <!-- File Input -->
+            <div class="form-group">
+                <label for="resume">Upload Resume</label>
+                <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
+            </div>
+
+            <!-- Textarea -->
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" placeholder="Enter your message here..."></textarea>
+            </div>
+
+            <!-- Password Input -->
+            <div class="form-group">
+                <label for="password">Password <span class="required">*</span></label>
+                <input type="password" id="password" name="password" required minlength="6" placeholder="Minimum 6 characters">
+                <div class="error-message">Password must be at least 6 characters long</div>
+            </div>
+
+            <!-- Agreement Checkbox -->
+            <div class="form-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="agree" name="agree" required>
+                    <label for="agree">I agree to the terms and conditions <span class="required">*</span></label>
+                </div>
+                <div class="error-message">You must agree to the terms and conditions</div>
+            </div>
+
+            <!-- Submit Buttons -->
+            <div class="form-group">
+                <button type="submit">Submit Form</button>
+                <button type="reset" class="btn-secondary">Reset Form</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Get form elements
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        const experienceRange = document.getElementById('experience');
+        const experienceValue = document.getElementById('experienceValue');
+
+        // Update range display
+        experienceRange.addEventListener('input', function() {
+            experienceValue.textContent = this.value;
+        });
+
+        // Form validation function
+        function validateField(field) {
+            const errorMessage = field.parentNode.querySelector('.error-message');
+            let isValid = true;
+
+            if (field.hasAttribute('required') && !field.value.trim()) {
+                isValid = false;
+            } else if (field.type === 'email' && field.value && !isValidEmail(field.value)) {
+                isValid = false;
+            } else if (field.hasAttribute('minlength') && field.value.length < field.minLength) {
+                isValid = false;
+            }
+
+            if (errorMessage) {
+                if (isValid || !field.value.trim()) {
+                    errorMessage.style.display = 'none';
+                } else {
+                    errorMessage.style.display = 'block';
+                }
+            }
+
+            return isValid;
+        }
+
+        // Email validation helper
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        // Real-time validation
+        form.addEventListener('input', function(e) {
+            validateField(e.target);
+        });
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate all required fields
+            let isFormValid = true;
+            const requiredFields = form.querySelectorAll('[required]');
+            
+            requiredFields.forEach(field => {
+                if (!validateField(field)) {
+                    isFormValid = false;
+                }
+            });
+
+            if (isFormValid) {
+                // Collect form data
+                const formData = new FormData(form);
+                const formObject = {};
+                
+                for (let [key, value] of formData.entries()) {
+                    if (formObject[key]) {
+                        if (Array.isArray(formObject[key])) {
+                            formObject[key].push(value);
+                        } else {
+                            formObject[key] = [formObject[key], value];
+                        }
+                    } else {
+                        formObject[key] = value;
+                    }
+                }
+
+                // Show success message
+                successMessage.style.display = 'block';
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+                
+                // Log form data
+                console.log('Form submitted:', formObject);
+            }
+        });
+
+        // Form reset
+        form.addEventListener('reset', function() {
+            // Hide messages
+            successMessage.style.display = 'none';
+            const errorMessages = form.querySelectorAll('.error-message');
+            errorMessages.forEach(msg => msg.style.display = 'none');
+            
+            // Reset range display
+            experienceValue.textContent = '5';
+        });
+    </script>
+</body>
+</html>
